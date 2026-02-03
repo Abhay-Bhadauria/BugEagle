@@ -1,17 +1,22 @@
-const aiService = require("../services/ai.service")
-
+const aiService = require("../services/ai.service");
 
 module.exports.getReview = async (req, res) => {
-
+  try {
     const code = req.body.code;
 
     if (!code) {
-        return res.status(400).send("Prompt is required");
+      return res.status(400).json({ error: "Prompt is required" });
     }
 
     const response = await aiService(code);
 
+    return res.status(200).json({ response });
 
-    res.send(response);
+  } catch (error) {
+    console.error("AI Controller Error:", error.message);
 
-}
+    return res.status(429).json({
+      error: "AI service temporarily unavailable. Please try again later."
+    });
+  }
+};
