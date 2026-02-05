@@ -3,7 +3,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_KEY);
 
 const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash", // more stable on free tier
+  model: "gemini-1.0-pro", // more stable on free tier
   systemInstruction: `
 You are a senior software engineer and expert code reviewer.
 Give concise, constructive, production-ready feedback.
